@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import { radioApi } from './services/radioApi';
@@ -7,15 +6,15 @@ import { useAudio } from './hooks/useAudio';
 
 const COUNTRIES = [
   { code: 'ALL', name: '🌍 Monde' },
-  { code: 'FR', name: '🇫🇷 France' },
-  { code: 'US', name: '🇺 USA' },
+  { code: 'FR', name: '🇷 France' },
+  { code: 'US', name: '🇺🇸 USA' },
   { code: 'GB', name: '🇬🇧 UK' },
-  { code: 'DE', name: '🇩🇪 Allemagne' },
-  { code: 'ES', name: '🇸 Espagne' },
-  { code: 'IT', name: '🇮 Italie' },
-  { code: 'CA', name: '🇨🇦 Canada' },
+  { code: 'DE', name: '🇪 Allemagne' },
+  { code: 'ES', name: '🇪🇸 Espagne' },
+  { code: 'IT', name: '🇮🇹 Italie' },
+  { code: 'CA', name: '🇦 Canada' },
   { code: 'BR', name: '🇧🇷 Brésil' },
-  { code: 'JP', name: '🇵 Japon' }
+  { code: 'JP', name: '🇯🇵 Japon' }
 ];
 
 const GENRES = [
@@ -76,7 +75,7 @@ export default function App() {
   const [alarmSt, setAlarmSt] = useState(null);
   const [alarmOn, setAlarmOn] = useState(false);
   const [showAlarm, setShowAlarm] = useState(false);
-  const [customAlert, setCustomAlert] = useState({ visible: false, title: '', message: '', icon: '️', type: 'error' });
+  const [customAlert, setCustomAlert] = useState({ visible: false, title: '', message: '', icon: '⚠️', type: 'error' });
   const [keepAwake, setKeepAwake] = useState(false);
   
   const { favorites, isFavorite, toggleFavorite } = useFavorites();
@@ -90,7 +89,7 @@ export default function App() {
   const theme = isDark ? themes.dark : themes.light;
 
   const showCustomAlert = (title, message, type = 'error') => {
-    const icons = { error: '⛔', success: '✅', info: 'ℹ️', warning: '️' };
+    const icons = { error: '⛔', success: '✅', info: 'ℹ️', warning: '⚠️' };
     setCustomAlert({ visible: true, title, message, icon: icons[type] || '⚠️', type });
   };
 
@@ -366,7 +365,7 @@ export default function App() {
           <div className="hero-info">
             <div className="hero-name">{current.name}</div>
             <div className="hero-status" style={{ color: theme.textMuted }}>
-              {playing ? '▶️ En lecture' : buffering ? '⏳ Chargement...' : '⏸️ En pause'}
+              {playing ? '▶️ En lecture' : buffering ? '⏳ Chargement...' : '️ En pause'}
             </div>
           </div>
           <div className="hero-controls">
@@ -381,7 +380,7 @@ export default function App() {
               style={{ backgroundColor: theme.primary, color: 'white' }}
               onClick={(e) => { e.stopPropagation(); togglePlay(); }}
             >
-              {playing ? '' : '▶'}
+              {playing ? '⏸️' : '▶️'}
             </button>
           </div>
         </div>
@@ -450,7 +449,7 @@ export default function App() {
           </div>
         ) : displayList.length === 0 ? (
           <div className="empty-state" style={{ gridColumn: '1 / -1' }}>
-            <div className="empty-icon"></div>
+            <div className="empty-icon">📻</div>
             <div>Aucune radio trouvée</div>
           </div>
         ) : (
@@ -479,7 +478,7 @@ export default function App() {
                 />
               ) : (
                 <div className="station-image" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px' }}>
-                  
+                  📻
                 </div>
               )}
               <div className="station-name">{station.name}</div>
@@ -523,13 +522,13 @@ export default function App() {
             />
           ) : (
             <div className="floating-image" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
-              
+              📻
             </div>
           )}
           <div className="floating-info">
             <div className="floating-name">{current.name}</div>
             <div className="floating-status" style={{ color: theme.textMuted }}>
-              {reconnecting ? '🔄 Reconnexion...' : buffering ? ' Chargement...' : playing ? '▶️ En lecture' : '⏸️ En pause'}
+              {reconnecting ? '🔄 Reconnexion...' : buffering ? '⏳ Chargement...' : playing ? '▶️ En lecture' : '⏸️ En pause'}
               {sleepSec && ` • ⏱️ ${formatSleepTime(sleepSec)}`}
             </div>
           </div>
@@ -546,14 +545,14 @@ export default function App() {
               onClick={() => setKeepAwake(!keepAwake)}
               title="Garder éveillé"
             >
-              {keepAwake ? '👁️' : '👁️‍🗨️'}
+              {keepAwake ? '👁️' : '👁️🗨️'}
             </button>
             <button 
               className="play-btn"
               style={{ backgroundColor: theme.primary, color: 'white' }}
               onClick={togglePlay}
             >
-              {playing ? '' : '▶'}
+              {playing ? '⏸️' : '▶️'}
             </button>
             <button 
               className="icon-btn"
@@ -574,7 +573,7 @@ export default function App() {
         }}
       >
         {[
-          { id: 'home', icon: '', label: 'Accueil' },
+          { id: 'home', icon: '🏠', label: 'Accueil' },
           { id: 'explore', icon: '🔍', label: 'Explorer' },
           { id: 'favorites', icon: '❤️', label: 'Favoris' },
           { id: 'history', icon: '🕐', label: 'Historique' }
@@ -599,7 +598,7 @@ export default function App() {
             style={{ backgroundColor: theme.card, color: theme.text }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="modal-title">️ Minuteur de sommeil</div>
+            <div className="modal-title">⏱️ Minuteur de sommeil</div>
             <div className="modal-buttons">
               {[15, 30, 45, 60, 90].map(min => (
                 <button
@@ -706,79 +705,4 @@ export default function App() {
       )}
     </div>
   );
-=======
-import { useState, useRef, useEffect } from 'react'
-
-const STREAM_URL = "https://stream.example.com/radio.mp3"
-
-function App() {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [status, setStatus] = useState("Prêt")
-  const audioRef = useRef(null)
-
-  const handlePlay = () => {
-    setStatus("Connexion...")
-    audioRef.current.play().then(() => {
-      setIsPlaying(true)
-      setStatus("En lecture 📡")
-    }).catch(err => {
-      setStatus("Erreur de lecture")
-      console.error(err)
-    })
-  }
-
-  const handlePause = () => {
-    audioRef.current.pause()
-    setIsPlaying(false)
-    setStatus("En pause ️")
-  }
-
-  const togglePlay = () => {
-    if (isPlaying) handlePause()
-    else handlePlay()
-  }
-
-  const handleAudioError = () => {
-    setStatus("Reconnexion dans 3s...")
-    setIsPlaying(false)
-    setTimeout(() => {
-      if (audioRef.current) {
-        audioRef.current.load()
-        handlePlay()
-      }
-    }, 3000)
-  }
-
-  const startSleepTimer = (minutes) => {
-    setStatus(`Arrêt dans ${minutes} min ⏱️`)
-    setTimeout(() => {
-      handlePause()
-      alert("Minuteur terminé !")
-    }, minutes * 60 * 1000)
-  }
-
-  return (
-    <div style={{ textAlign: 'center', marginTop: '40px', fontFamily: 'system-ui, sans-serif' }}>
-      <h1>📻 Radio PWA</h1>
-      
-      <audio ref={audioRef} src={STREAM_URL} onError={handleAudioError} />
-      
-      <button 
-        onClick={togglePlay}
-        style={{ padding: '15px 30px', fontSize: '18px', margin: '20px', borderRadius: '10px', border: 'none', background: isPlaying ? '#dc3545' : '#28a745', color: 'white', cursor: 'pointer' }}
-      >
-        {isPlaying ? '⏸️ Pause' : '▶️ Lecture'}
-      </button>
-      
-      <p>Statut : {status}</p>
-      
-      <div style={{ marginTop: '30px' }}>
-        <p>⏱️ Minuterie :</p>
-        <button onClick={() => startSleepTimer(15)} style={{ margin: '5px', padding: '10px' }}>15 min</button>
-        <button onClick={() => startSleepTimer(30)} style={{ margin: '5px', padding: '10px' }}>30 min</button>
-        <button onClick={() => startSleepTimer(60)} style={{ margin: '5px', padding: '10px' }}>60 min</button>
-      </div>
-    </div>
-  )
->>>>>>> 31c9e0e27fc5403a8fa2ce0bd1cfb41e35029c6e
 }
