@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/radio-app-pwa/',  // ⬅️ AJOUTE CETTE LIGNE
   plugins: [
     react(),
     VitePWA({
@@ -11,22 +12,22 @@ export default defineConfig({
       manifest: {
         name: 'Radio App PWA',
         short_name: 'Radio PWA',
-        description: 'Écoutez vos radios préférées en direct',
+        description: 'Ecoutez vos radios préférées en direct',
         theme_color: '#007aff',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
-        scope: '/',
+        start_url: '/radio-app-pwa/',
+        scope: '/radio-app-pwa/',
         icons: [
           {
-            src: '/icon-192x192.png',
+            src: '/radio-app-pwa/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png',
             purpose: 'any'
           },
           {
-            src: '/icon-512x512.png',
+            src: '/radio-app-pwa/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
